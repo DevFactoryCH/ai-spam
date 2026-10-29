@@ -101,7 +101,7 @@ AiSpam::hold(form: 'contact', payload: $validated)
 | `skipped` | `AI_SPAM_ENABLED=false`. The action was dispatched immediately. |
 | `released` | A rejected submission was approved manually. |
 
-Each submission stores the verdict (`spam_probability`, `category` and the category probabilities), plus the provider and model that answered.
+Each submission stores the verdict (`spam_probability`, `category`, `category_probabilities`, `category_confidence` and the token `usage`), plus the provider and model that answered.
 
 Events: `SpamDetected` (pre-filter), `SubmissionApproved`, `SubmissionRejected`, `SubmissionUnchecked`, `SubmissionReleased`.
 

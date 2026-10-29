@@ -60,6 +60,8 @@ it('sends the notification when the AI approves the submission', function () {
     expect($submission->status)->toBe(SubmissionStatus::Approved)
         ->and($submission->verdict['spam_probability'])->toBe(0.05)
         ->and($submission->verdict['category'])->not->toBeNull()
+        ->and($submission->verdict)->toHaveKeys(['category_probabilities', 'category_confidence'])
+        ->and($submission->verdict['usage'])->toBe(['input_tokens' => 0, 'output_tokens' => 0])
         ->and($submission->checked_at)->not->toBeNull()
         ->and($submission->action_dispatched_at)->not->toBeNull();
 

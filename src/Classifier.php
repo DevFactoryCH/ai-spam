@@ -101,6 +101,11 @@ class Classifier
             spamProbability: $spam->probability,
             category: $category instanceof ChoiceAnswer ? $category->choice : null,
             categoryProbabilities: $category instanceof ChoiceAnswer ? $category->probabilities : [],
+            categoryConfidence: $category instanceof ChoiceAnswer ? $category->confidence : null,
+            usage: [
+                'input_tokens' => $response->usage->inputTokens,
+                'output_tokens' => $response->usage->outputTokens,
+            ],
         );
     }
 }
