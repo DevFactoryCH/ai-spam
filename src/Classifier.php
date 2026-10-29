@@ -41,7 +41,7 @@ class Classifier
             ]))
             ->question('category', new Choice('Which category best describes the submission?', self::CATEGORIES))
             ->timeout((int) config('ai-spam.timeout', 30))
-            ->classify(config('ai-spam.provider'), config('ai-spam.model'));
+            ->classify(config('ai-spam.provider') ?: null, config('ai-spam.model') ?: null);
 
         return new ClassifiedSubmission(
             $this->verdict($response),

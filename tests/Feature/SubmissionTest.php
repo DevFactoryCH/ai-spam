@@ -119,6 +119,17 @@ it('uses the configured provider and model', function () {
         ->and($submission->model)->toBe('my-classifier');
 });
 
+it('falls back to the default provider and model when they are left empty', function () {
+    Notification::fake();
+    config(['ai-spam.provider' => '', 'ai-spam.model' => '', 'ai.default_for_classification' => 'openai']);
+    fakeSpamProbability(0.1);
+
+    $submission = holdContact()->refresh();
+
+    expect($submission->provider)->toBe('openai')
+        ->and($submission->model)->toBe('gpt-6-luna');
+});
+
 it('fails open when every attempt failed', function () {
     Notification::fake();
     Event::fake([SubmissionUnchecked::class]);
